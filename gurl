@@ -30,13 +30,13 @@ class HelloServlet < HTTPServlet::AbstractServlet
     <form action="gurl" method="get" accept-charset="utf-8">
     <ul>
     	<li>
-    	  <label for="lable_for_foo">URL to parse</label><input type="text" name="get_url" value="#{req.query['get_url']}" id="get_url" size="100px">
+    	  <label for="url">URL to parse</label><input type="text" name="url" value="#{req.query['url']}" id="url" size="100px">
     	</li>
     	<li>
-    	  <label for="lable_for_foo">Regex</label><input type="text" name="regex_me" value="#{req.query['regex_me']}" id="regex_me" size="100px">
+    	  <label for="regex">Regex</label><input type="text" name="regex" value="#{req.query['regex']}" id="regex" size="100px">
       </li>
       <li>Output Type:
-    	  <select name="output_value" id="output_value" onchange="" size="1">
+    	  <select name="output" id="output" onchange="" size="1">
     	  	<option value="json">json</option>
     	  	<option value="xml">xml</option>
     	  </select>
