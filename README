@@ -1,0 +1,19 @@
+Gurl is meant to be a pure ruby / mongrel script that listens on port 1138.
+
+It receives a url param (get_url) and a regex string (regex_me)
+
+It will fetch the url and parse it with the regex returning the output as either JSON or XML
+
+example:
+
+http://localhost:1138/gurl
+
+url api: 
+
+http://localhost:1138/gurl?get_url=test+foo&regex_me=this+is+a+test&output_value=json
+
+Todo: 
+
+implement url fetcher
+implement regex parser
+implement output formatters

@@ -1,0 +1,56 @@
+#!/usr/bin/ruby -w
+# 
+#  gurl: server + url parser
+#  
+#  Created by GlenC on 2010-12-04.
+#  Copyright 2009 glenc.com. All rights reserved.
+# 
+
+require 'webrick'
+include WEBrick
+
+s = HTTPServer.new(
+	:Port => 1138,
+	:DocumentRoot => File.join(Dir.pwd, "/")
+	)
+	
+	
+class HelloServlet < HTTPServlet::AbstractServlet
+ def do_GET(req, res)
+   res['Content-Type'] = "text/html"
+   res.body = %{<html>
+  <head>
+   <title>Gurl</title>
+   <link rel="stylesheet" type="text/css" href="/ue/styles.css"/>
+  </head>
+  <body>
+    <h1>Gurl Yo!</h1>
+    <!--<p><b>You're calling from a:</b> <i>#{req['User-Agent']}</i></p>-->
+    <!--<p><b>I see parameters:</b><i> #{req.query['hello']}</i></p>-->
+    <form action="gurl" method="get" accept-charset="utf-8">
+    <ul>
+    	<li>
+    	  <label for="lable_for_foo">URL to parse</label><input type="text" name="get_url" value="#{req.query['get_url']}" id="get_url" size="100px">
+    	</li>
+    	<li>
+    	  <label for="lable_for_foo">Regex</label><input type="text" name="regex_me" value="#{req.query['regex_me']}" id="regex_me" size="100px">
+      </li>
+      <li>Output Type:
+    	  <select name="output_value" id="output_value" onchange="" size="1">
+    	  	<option value="json">json</option>
+    	  	<option value="xml">xml</option>
+    	  </select>
+    	</li>
+      <li>
+    	  <p><input type="submit" value="Continue &rarr;"></p>
+    	</li>
+    </form>
+  </body>
+</html>
+   }
+ end
+end
+s.mount("/gurl", HelloServlet)
+trap("INT") {s.shutdown}
+puts "starting: http://localhost:1138/hello?foo&bar"
+s.start
